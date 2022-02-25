@@ -106,7 +106,6 @@ public class Product extends AbstractFunction{
                 }else{
                     temp[j] = super.get(j);
                 }
-
             }
             tempDeriv[i] = (FunctionFactory.product(temp));
         }
