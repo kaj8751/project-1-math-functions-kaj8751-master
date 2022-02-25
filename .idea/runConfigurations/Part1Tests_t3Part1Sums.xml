@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Part1Tests.t3Part1Sums" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="cs2-20215-project1-functions" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="testing.junit_part1.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="testing.junit_part1" />
+    <option name="MAIN_CLASS_NAME" value="testing.junit_part1.Part1Tests" />
+    <option name="METHOD_NAME" value="t3Part1Sums" />
+    <option name="TEST_OBJECT" value="method" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Part2Tests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="cs2-20215-project1-functions" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="testing.junit_part1.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="testing.junit_part2" />
+    <option name="MAIN_CLASS_NAME" value="testing.junit_part2.Part2Tests" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
