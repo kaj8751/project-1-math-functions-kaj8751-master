@@ -1,7 +1,6 @@
 package ritmath;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A function representing the product of factors
@@ -95,21 +94,21 @@ public class Product extends AbstractFunction{
      * @return d(fx)/dx
      */
     public MathFunction derivative() {
+        MathFunction[] tempDeriv = new MathFunction[product.length];
         MathFunction[] temp = new MathFunction[product.length];
-        MathFunction[] finalDeriv = new MathFunction[product.length];
         if(product.length == 1 && super.get(0).isConstant()){
             return FunctionFactory.constant(1);
         }
         for(int i = 0; i < product.length; i++){
             for(int j = 0; j < product.length; j++){
                 if(i == j){
-                    finalDeriv[j] = super.get(i).derivative();
+                    temp[j] = super.get(i).derivative();
                 }else{
-                    finalDeriv[j] = super.get(j);
+                    temp[j] = super.get(j);
                 }
             }
-            temp[i] = (FunctionFactory.product(finalDeriv));
+            tempDeriv[i] = (FunctionFactory.product(temp));
         }
-        return FunctionFactory.sum(temp);
+        return new Sum(tempDeriv);
     }
 }

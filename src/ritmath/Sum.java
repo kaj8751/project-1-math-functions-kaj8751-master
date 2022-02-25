@@ -26,7 +26,7 @@ public class Sum extends AbstractFunction{
     protected void normalize(){
         int constants = 0;
         ArrayList<MathFunction> tempSum = new ArrayList<>();
-        for (MathFunction term : super.terms) {
+        for (MathFunction term : sum) {
             if(term.isConstant()){
                 constants+=term.evaluate(0);
             }

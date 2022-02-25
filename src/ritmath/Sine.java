@@ -52,7 +52,7 @@ public class Sine extends AbstractFunction{
      * @return df(x)/dx
      */
     public MathFunction derivative() {
-        MathFunction[] temp = new MathFunction[sin.length+1];
+        MathFunction[] temp = new MathFunction[sin.length+2];
         MathFunction[] finalDeriv = new MathFunction[sin.length];
         for(int i = 0; i < sin.length; i++){
             for(int j = 0; j < sin.length; j++){
@@ -62,9 +62,10 @@ public class Sine extends AbstractFunction{
                     finalDeriv[j] = super.get(j);
                 }
             }
-            temp[i] = (FunctionFactory.product(finalDeriv));
+            temp[i+1] = (FunctionFactory.product(finalDeriv));
         }
-        temp[sin.length] = new Cosine(sin);
+        temp[0] = new Cosine(sin);
+        temp[sin.length+1] = new Constant(1);
         return new Product(temp);
     }
 }

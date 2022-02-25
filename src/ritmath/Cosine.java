@@ -51,7 +51,7 @@ public class Cosine extends AbstractFunction {
      * @return df(x)/dx
      */
     public MathFunction derivative() {
-        MathFunction[] temp = new MathFunction[cos.length+1];
+        MathFunction[] temp = new MathFunction[cos.length+2];
         MathFunction[] finalDeriv = new MathFunction[cos.length];
         for(int i = 0; i < cos.length; i++){
             for(int j = 0; j < cos.length; j++){
@@ -61,9 +61,10 @@ public class Cosine extends AbstractFunction {
                     finalDeriv[j] = super.get(j);
                 }
             }
-            temp[i] = (FunctionFactory.product(finalDeriv));
+            temp[i+1] = (FunctionFactory.product(finalDeriv));
         }
-        temp[cos.length] = new Sine(cos);
+        temp[0] = new Sine(cos);
+        temp[cos.length+1] = new Constant(-1);
         return new Product(temp);
     }
 }
