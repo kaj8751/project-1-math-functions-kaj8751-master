@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Key'Mon Jenkins
  */
 public class Sum extends AbstractFunction{
-    MathFunction[] sum;
+
 
     /**
      * Create a sum from any array of MathFunction instances
@@ -16,7 +16,6 @@ public class Sum extends AbstractFunction{
      */
     public Sum(MathFunction... terms){
         super(terms);
-        sum = super.terms;
         this.normalize();
     }
 
@@ -26,7 +25,7 @@ public class Sum extends AbstractFunction{
     protected void normalize(){
         int constants = 0;
         ArrayList<MathFunction> tempSum = new ArrayList<>();
-        for (MathFunction term : sum) {
+        for (MathFunction term : super.terms) {
             if(term.isConstant()){
                 constants+=term.evaluate(0);
             }
@@ -37,8 +36,12 @@ public class Sum extends AbstractFunction{
         if (constants != 0) {
             tempSum.add(new Constant(constants));
         }
-        sum = tempSum.toArray(new MathFunction[0]);
-}
+        MathFunction[] temp = new MathFunction[tempSum.size()];
+        for(int i = 0; i < tempSum.size(); i++){
+            temp[i] = tempSum.get(i);
+        }
+        super.terms = temp;
+    }
 
     /**
      * Create a new function that is the derivative of this one.
@@ -94,7 +97,7 @@ public class Sum extends AbstractFunction{
      * @return the textual representation of this function
      */
     public String toString(){
-        super.terms = sum;
+        this.normalize();
         String add = "";
         add += "( ";
         int i = 0;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Key'Mon Jenkins
  */
 public class Product extends AbstractFunction{
-    MathFunction[] product;
+
 
     /**
      * Create a product from any array of MathFunction instances
@@ -16,7 +16,6 @@ public class Product extends AbstractFunction{
      */
     protected Product(MathFunction... factors) {
         super(factors);
-        product = super.terms;
         this.normalize();
     }
 
@@ -39,15 +38,15 @@ public class Product extends AbstractFunction{
         if(constants == 0){
             tempProd.removeAll(tempTemp);
             tempProd.add(new Constant(0));
-            product = tempProd.toArray(new MathFunction[0]);
         }
-        else if(constants == 1){
-            product = tempProd.toArray(new MathFunction[0]);
-        }
-        else{
+        else if(constants != 1){
             tempProd.add(new Constant(constants));
-            product = tempProd.toArray(new MathFunction[0]);
         }
+        MathFunction[] temp = new MathFunction[tempProd.size()];
+        for(int i = 0; i < tempProd.size(); i++){
+            temp[i] = tempProd.get(i);
+        }
+        super.terms = temp;
     }
 
     /**
@@ -55,7 +54,7 @@ public class Product extends AbstractFunction{
      * @return the textual representation of this function
      */
     public String toString() {
-        super.terms = product;
+        this.normalize();
         String prod = "";
         prod += "( ";
         if(super.terms.length == 1){
@@ -94,22 +93,14 @@ public class Product extends AbstractFunction{
      * @return d(fx)/dx
      */
     public MathFunction derivative() {
-        MathFunction[] tempDeriv = new MathFunction[product.length];
-        MathFunction[] temp = new MathFunction[product.length];
-        if(product.length == 1 && super.get(0).isConstant()){
-            return FunctionFactory.constant(1);
+        MathFunction[] temp = new MathFunction[super.terms.length - 1];
+        if(super.terms.length == 1){
+            return super.get(0).derivative();
         }
-        for(int i = 0; i < product.length; i++){
-            for(int j = 0; j < product.length; j++){
-                if(i == j){
-                    temp[j] = super.get(i).derivative();
-                }else{
-                    temp[j] = super.get(j);
-                }
-
-            }
-            tempDeriv[i] = (FunctionFactory.product(temp));
+        for(int i = 1; i < super.terms.length; i++){
+            temp[i-1] = super.get(i);
         }
-        return new Sum(tempDeriv);
+        return new Sum(new Product(super.get(0), new Product(temp).derivative()),
+                new Product(new Product(temp), super.get(0).derivative()));
     }
 }
