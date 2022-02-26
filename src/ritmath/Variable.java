@@ -53,10 +53,10 @@ public class Variable extends AbstractFunction{
      *                 be used if the function has a closed form integral)
      * @return the value of the integral over the given bounds
      */
+    @Override
     public double integral(double lower, double upper, int accuracy){
         double intergCount = 0;
         double increment = (upper - lower) / accuracy;
-        double j = 0;
         boolean first = true;
         for(double i = lower; i <= upper; i += increment){
             if(first){

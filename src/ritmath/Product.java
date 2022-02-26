@@ -57,14 +57,14 @@ public class Product extends AbstractFunction{
         this.normalize();
         String prod = "";
         prod += "( ";
-        if(super.terms.length == 1){
+        if(super.numChildren() == 1){
             prod = "";
             return prod + super.get(0);
         }
         else{
-            for(int i = 0; i < super.terms.length; i++){
+            for(int i = 0; i < super.numChildren(); i++){
                 prod += super.get(i);
-                if(i + 1 < super.terms.length){
+                if(i + 1 < super.numChildren()){
                     prod += " * ";
                 }
             }
@@ -93,14 +93,18 @@ public class Product extends AbstractFunction{
      * @return d(fx)/dx
      */
     public MathFunction derivative() {
-        MathFunction[] temp = new MathFunction[super.terms.length - 1];
-        if(super.terms.length == 1){
+        MathFunction[] temp = new MathFunction[super.numChildren() - 1];
+        if(super.numChildren() == 1){
             return super.get(0).derivative();
         }
-        for(int i = 1; i < super.terms.length; i++){
+        for(int i = 1; i < super.numChildren(); i++){
             temp[i-1] = super.get(i);
         }
         return new Sum(new Product(super.get(0), new Product(temp).derivative()),
                 new Product(new Product(temp), super.get(0).derivative()));
+    }
+
+    public double integral(double lower, double upper, int accuracy) {
+        return super.integral(lower, upper, accuracy);
     }
 }
