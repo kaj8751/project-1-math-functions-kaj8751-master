@@ -54,7 +54,26 @@ public class Variable extends AbstractFunction{
      * @return the value of the integral over the given bounds
      */
     public double integral(double lower, double upper, int accuracy){
-        return 0;
+        double intergCount = 0;
+        double increment = (upper - lower) / accuracy;
+        double j = 0;
+        boolean first = true;
+        for(double i = lower; i <= upper; i += increment){
+            if(first){
+                intergCount += this.evaluate(i);
+                first = false;
+            }else if(i == upper){
+                intergCount += this.evaluate(i);
+            }else {
+                intergCount += 2 * this.evaluate(i);
+            }
+        }
+        if(intergCount < 0){
+            intergCount = Math.ceil(increment/2 * intergCount);
+        }else {
+            intergCount = Math.floor(increment/2 * intergCount);
+        }
+        return intergCount;
     }
 
     /**

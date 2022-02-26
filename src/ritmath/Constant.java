@@ -58,7 +58,17 @@ public class Constant extends AbstractFunction{
      */
     @Override
     public double integral(double lower, double upper, int accuracy){
-        return 0;
+        double intergCount = 0;
+        double increment = (upper - lower) / accuracy;
+        for(double i = lower; i < upper; i += increment) {
+            intergCount += 2 * constantValue;
+        }
+        if(intergCount < 0){
+            intergCount = Math.ceil(increment/2 * intergCount);
+        }else {
+            intergCount = Math.floor(increment / 2 * intergCount);
+        }
+        return intergCount;
     }
 
     /**
