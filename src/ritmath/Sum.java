@@ -88,8 +88,13 @@ public class Sum extends AbstractFunction{
      *                 be used if the function has a closed form integral)
      * @return the computed integral over the given bounds
      */
+    @Override
     public double integral(double lower, double upper, int accuracy){
-        return 0;
+        double intergCount = 0;
+        for(MathFunction term : super.terms) {
+            intergCount += term.integral(lower, upper, accuracy);
+        }
+        return intergCount;
     }
 
     /**
@@ -101,7 +106,7 @@ public class Sum extends AbstractFunction{
         String add = "";
         add += "( ";
         int i = 0;
-        if(super.terms.length == 1){
+        if(super.numChildren() == 1){
             add = "";
             return add + super.get(0);
         }
@@ -109,12 +114,11 @@ public class Sum extends AbstractFunction{
             for (MathFunction term : super.terms) {
                 add += super.get(i);
                 i += 1;
-                if(i  < super.terms.length){
+                if(i  < super.numChildren()){
                     add += " + ";
                 }
             }
         }
-
         return add + " )";
     }
 
