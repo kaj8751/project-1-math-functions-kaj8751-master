@@ -42,7 +42,7 @@ public abstract class AbstractFunction implements MathFunction, Iterable<MathFun
      * @param children the new child terms of this function
      */
     protected void setChildren(MathFunction[] children) {
-
+        terms = children;
     }
 
     /**
@@ -105,25 +105,23 @@ public abstract class AbstractFunction implements MathFunction, Iterable<MathFun
      * @return the integral result as a double
      */
     public double integral(double lower, double upper, int accuracy) {
-        double intergCount = 1;
+        ArrayList<Double> interg = new ArrayList<>();
+        double intergCount = 0;
         double increment = (upper - lower) / accuracy;
         boolean first = true;
-        if(terms.length == 1){
-            intergCount = this.get(0).integral(lower, upper, accuracy);
-        }else {
-            for (double i = lower; i <= upper; i += increment) {
-                if (first) {
-                    intergCount += this.evaluate(i);
-                    first = false;
-                } else if (i == upper) {
-                    intergCount += this.evaluate(i);
-                } else {
-                    intergCount += 2 * this.evaluate(i);
-                }
+            for (int i = 0; i <= accuracy ; i ++) {
+            double test = lower + increment * i;
+            if(!first && i != accuracy){
+                interg.add(2 * this.evaluate(test));
+            }else {
+                interg.add(this.evaluate(test));
+                first = false;
             }
-            intergCount = increment/2 * intergCount;
         }
-        return intergCount;
+            for(Double val : interg){
+                intergCount += val;
+            }
+        return (increment / 2) * intergCount;
     }
 }
 

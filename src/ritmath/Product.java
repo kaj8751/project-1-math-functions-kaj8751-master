@@ -103,8 +103,4 @@ public class Product extends AbstractFunction{
         return new Sum(new Product(super.get(0), new Product(temp).derivative()),
                 new Product(new Product(temp), super.get(0).derivative()));
     }
-
-    public double integral(double lower, double upper, int accuracy) {
-        return super.integral(lower, upper, accuracy);
-    }
 }

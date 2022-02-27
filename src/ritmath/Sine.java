@@ -15,7 +15,6 @@ public class Sine extends AbstractFunction{
     public Sine(MathFunction... arg){
         super(arg);
         sin = super.terms;
-
     }
 
     /**
