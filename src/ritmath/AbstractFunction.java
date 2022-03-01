@@ -109,8 +109,8 @@ public abstract class AbstractFunction implements MathFunction, Iterable<MathFun
         double intergCount = 0;
         double increment = (upper - lower) / accuracy;
         boolean first = true;
-            for (int i = 0; i <= accuracy ; i ++) {
-            double test = lower + increment * i;
+        for (int i = 0; i <= accuracy ; i ++) {
+            double test = (increment * i) + lower;
             if(!first && i != accuracy){
                 interg.add(2 * this.evaluate(test));
             }else {

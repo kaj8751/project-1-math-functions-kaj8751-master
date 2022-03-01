@@ -39,11 +39,7 @@ public class Sine extends AbstractFunction{
      * @return the evaluation of the function at the given x
      */
     public double evaluate(double x) {
-        double evaluatedSin = 1;
-        for(MathFunction temp : sin){
-            evaluatedSin = Math.sin(temp.evaluate(x));
-        }
-        return evaluatedSin;
+        return Math.sin(sin[0].evaluate(x));
     }
 
     /**

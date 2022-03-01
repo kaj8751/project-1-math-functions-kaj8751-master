@@ -46,7 +46,7 @@ public class Product extends AbstractFunction{
         for(int i = 0; i < tempProd.size(); i++){
             temp[i] = tempProd.get(i);
         }
-        super.terms = temp;
+        super.setChildren(temp);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Product extends AbstractFunction{
     public double evaluate(double x) {
         double evaluatedProd = 1;
         for(MathFunction temp: super.terms){
-            evaluatedProd = evaluatedProd * temp.evaluate(x);
+            evaluatedProd *= temp.evaluate(x);
         }
         return evaluatedProd;
     }

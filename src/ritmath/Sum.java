@@ -40,7 +40,7 @@ public class Sum extends AbstractFunction{
         for(int i = 0; i < tempSum.size(); i++){
             temp[i] = tempSum.get(i);
         }
-        super.terms = temp;
+        super.setChildren(temp);
     }
 
     /**

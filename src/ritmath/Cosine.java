@@ -39,11 +39,7 @@ public class Cosine extends AbstractFunction {
      * @return the evaluation of the function at the given x
      */
     public double evaluate(double x) {
-        double evaluatedCos = 1;
-        for(MathFunction temp : cos){
-            evaluatedCos = Math.cos(temp.evaluate(x));
-        }
-        return evaluatedCos;
+        return Math.cos(cos[0].evaluate(x));
     }
 
     /**
