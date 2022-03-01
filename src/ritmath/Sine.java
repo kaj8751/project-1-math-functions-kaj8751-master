@@ -47,20 +47,6 @@ public class Sine extends AbstractFunction{
      * @return df(x)/dx
      */
     public MathFunction derivative() {
-        MathFunction[] temp = new MathFunction[sin.length+2];
-        MathFunction[] finalDeriv = new MathFunction[sin.length];
-        for(int i = 0; i < sin.length; i++){
-            for(int j = 0; j < sin.length; j++){
-                if(i == j){
-                    finalDeriv[j] = super.get(i).derivative();
-                }else{
-                    finalDeriv[j] = super.get(j);
-                }
-            }
-            temp[i+1] = (FunctionFactory.product(finalDeriv));
-        }
-        temp[0] = new Cosine(sin);
-        temp[sin.length+1] = new Constant(1);
-        return new Product(temp);
+        return FunctionFactory.product(new Cosine(sin), sin[0].derivative());
     }
 }

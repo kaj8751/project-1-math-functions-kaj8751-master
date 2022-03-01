@@ -55,7 +55,7 @@ public class Sum extends AbstractFunction{
         ArrayList<MathFunction> tempSums = new ArrayList<>();
         for(MathFunction temp: super.terms) {
             deriv = temp.derivative();
-            if (!deriv.isConstant()) {
+            if (deriv.isConstant()) {
                 addConst += deriv.evaluate(0);
             } else {
                 tempSums.add(deriv);
@@ -63,7 +63,7 @@ public class Sum extends AbstractFunction{
         }
         tempSums.add(new Constant(addConst));
         MathFunction[] finalDeriv = tempSums.toArray(new MathFunction[0]);
-        return new Sum(finalDeriv);
+        return FunctionFactory.sum(finalDeriv);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Sum extends AbstractFunction{
      * @return the evaluation of the function at the given x
      */
     public double evaluate(double x){
-        int evaluatedSums = 0;
+        double evaluatedSums = 0;
         for(MathFunction temp: super.terms){
             evaluatedSums += temp.evaluate(x);
         }
@@ -102,7 +102,6 @@ public class Sum extends AbstractFunction{
      * @return the textual representation of this function
      */
     public String toString(){
-        this.normalize();
         String add = "";
         add += "( ";
         int i = 0;

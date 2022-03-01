@@ -236,9 +236,9 @@ public class Part2Tests {
         funcsToTest.add( "SnX" );
         funcsToTest.add( "SnX2" );
         funcsToTest.add( "CsX" );
-        //funcsToTest.add( "CsSP" );
+        funcsToTest.add( "CsSP" );
         funcsToTest.add( "CsSn" );
-        //funcsToTest.add( "Sn2X" );
+        funcsToTest.add( "Sn2X" );
 
         SnC =
                 FunctionFactory.sine( FunctionFactory.constant( Math.PI ) );

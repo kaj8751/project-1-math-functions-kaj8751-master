@@ -105,22 +105,14 @@ public abstract class AbstractFunction implements MathFunction, Iterable<MathFun
      * @return the integral result as a double
      */
     public double integral(double lower, double upper, int accuracy) {
-        ArrayList<Double> interg = new ArrayList<>();
         double intergCount = 0;
         double increment = (upper - lower) / accuracy;
-        boolean first = true;
-        for (int i = 0; i <= accuracy ; i ++) {
-            double test = (increment * i) + lower;
-            if(!first && i != accuracy){
-                interg.add(2 * this.evaluate(test));
-            }else {
-                interg.add(this.evaluate(test));
-                first = false;
-            }
+        for (int i = 1; i < accuracy; i ++) {
+            double test = increment * i + lower;
+            intergCount += (2 * this.evaluate(test));
         }
-            for(Double val : interg){
-                intergCount += val;
-            }
+        intergCount += evaluate(upper);
+        intergCount += evaluate(lower);
         return (increment / 2) * intergCount;
     }
 }

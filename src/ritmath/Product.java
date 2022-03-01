@@ -54,7 +54,6 @@ public class Product extends AbstractFunction{
      * @return the textual representation of this function
      */
     public String toString() {
-        this.normalize();
         String prod = "";
         prod += "( ";
         if(super.numChildren() == 1){
